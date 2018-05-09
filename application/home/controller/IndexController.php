@@ -18,6 +18,7 @@ class IndexController extends Controller {
     }
 
     public function indexAction(){
-        return $this->fetch();
+        file_grabbing("http://kaijiang.500.com/shtml/ssq/03001.shtml");
+        //return $this->fetch();
     }
 }
