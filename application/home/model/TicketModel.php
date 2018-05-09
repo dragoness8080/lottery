@@ -13,4 +13,7 @@ use think\Model;
 
 class TicketModel extends Model {
 
+    protected $table = 'ticket';
+    protected $pk = 'id';
+    protected $resultSetType = 'collection';
 }
