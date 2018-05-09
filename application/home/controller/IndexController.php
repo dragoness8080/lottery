@@ -9,6 +9,7 @@
 namespace app\home\controller;
 
 
+use think\Config;
 use think\Controller;
 
 class IndexController extends Controller {
@@ -18,7 +19,15 @@ class IndexController extends Controller {
     }
 
     public function indexAction(){
-        file_grabbing("http://kaijiang.500.com/shtml/ssq/03001.shtml");
+        $url = Config::get('double_chromosphere.curl_url');
+        $year = Config::get('double_chromosphere.cur_year');
+        $number = Config::get('double_chromosphere.cur_number');
+        
+        $curYear = date('y', time());
+
+
+
+        $ball = file_grabbing("http://kaijiang.500.com/shtml/ssq/03001.shtml");
         //return $this->fetch();
     }
 }
