@@ -9,7 +9,7 @@
 return [
     'double_chromosphere' =>[
         'curl_url'  => 'http://kaijiang.500.com/shtml/ssq/',    //获取号码地址
-        'cur_number' => '52',   //当前获取期数
+        'cur_number' => '01',   //当前获取期数
         'cur_year'  => '03', //当前年份
     ]
 ];

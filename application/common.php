@@ -31,8 +31,8 @@ function file_grabbing($url){
 
     if(!empty($html)){
         $ball = array();
-        $z = preg_match_all('/<li[^>]*class="ball_red".*?>.*?<\/li>/ism',$html,$red);
-        $z = preg_match('/<li[^>]*class="ball_blue".*?>.*?<\/li>/ism',$html,$blue);
+        preg_match_all('/<li[^>]*class="ball_red".*?>.*?<\/li>/ism',$html,$red);
+        preg_match('/<li[^>]*class="ball_blue".*?>.*?<\/li>/ism',$html,$blue);
 
         $red = array_merge($red,$blue);
 
@@ -43,6 +43,8 @@ function file_grabbing($url){
             }
             $ball = array_merge($ball,$item);
         }
+
+        unset($html);
 
         return $ball;
     }else{

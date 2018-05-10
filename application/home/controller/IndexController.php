@@ -28,13 +28,14 @@ class IndexController extends Controller {
 
         $curYear = date('y', time());
         if($year != $curYear && $year < $curYear){
+            set_time_limit(0);
             for ($year;$year<=$curYear;$year++){
                 $curNumber = 1;
                 for($curNumber;$curNumber<=160;$curNumber++){
-                    $str = substr("0" . $year,-1,2) . substr("0000" . $curNumber,-1,3);
-                    $curl_url = $url . $str . "shtml";
+                    $str = substr("0" . $year,-2) . substr("0000" . $curNumber,-3);
+                    $curl_url = $url . $str . ".shtml";
                     $ball = file_grabbing($curl_url);
-                    if($ball !== false){
+                    if(!empty($ball)){
                         $list[] = [
                             'issue' => $str,
                             'identifier' => $curNumber,
