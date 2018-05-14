@@ -23,10 +23,11 @@ class IndexController extends Controller {
     }
 
     protected function grabbing(){
-        $ball_url = Config::get('double_chromosphere.curl_url');
-        $ball_year = Config::get('double_chromosphere.cur_year');
-        $ball_no = Config::get('double_chromosphere.cur_number');
-        $fixt = Config::get('double_chromosphere.curl_html');
+        $config = Config::get('double_chromosphere');
+        $ball_url = $config['curl_url'];
+        $ball_year = $config['cur_year'];;
+        $ball_no = $config['cur_number'];
+        $fixt = $config['curl_html'];
 
         $cur_year = date('y', time());
         if($ball_year != $cur_year){
@@ -57,9 +58,9 @@ class IndexController extends Controller {
 
                     $model->save($data);
 
-                    Config::set('double_chromosphere.cur_year', $ball_year);
-                    Config::set('double_chromosphere.cur_number', $ball_no + 1);
-
+                    $config['cur_year'] = $ball_year;
+                    $config['cur_number'] = $ball_no + 1;
+                    Config::set(array('double_chromosphere' => $config));
                 }
             }
         }
