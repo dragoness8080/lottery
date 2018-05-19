@@ -58,9 +58,8 @@ class IndexController extends Controller {
 
                     $model->save($data);
 
-                    $config['cur_year'] = $ball_year;
-                    $config['cur_number'] = $ball_no + 1;
-                    Config::set(array('double_chromosphere' => $config));
+                    //$config['cur_year'] = $ball_year;
+                    //$config['cur_number'] = $ball_no + 1;
                 }
             }
         }
@@ -68,6 +67,10 @@ class IndexController extends Controller {
     }
 
     public function indexAction(){
+
+        $file = __DIR__;
+        var_dump($file);die();
+
         return $this->fetch();
     }
 }

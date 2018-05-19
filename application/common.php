@@ -51,3 +51,31 @@ function file_grabbing($url){
         return false;
     }
 }
+
+/**
+ * 设置配置文件
+ * @param $path
+ * @param $params
+ * @return bool
+ */
+function set_config($path,$params){
+    if(empty($path)){
+        return false;
+    }
+
+    if(is_array($params)){
+        $keys = array();
+        $vals = array();
+        foreach ($params as $key => $item){
+            $keys[] = '/\'' . $key . '\'(.*?),/';
+            $vals[] = "'" . $key . "' => '" . $item . "'";
+        }
+
+        $string = file_get_contents($path);
+        $string = preg_replace($keys, $vals, $string);
+        file_put_contents($path, $string);
+        return true;
+    }else{
+        return false;
+    }
+}
