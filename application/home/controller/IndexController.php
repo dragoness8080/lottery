@@ -68,7 +68,7 @@ class IndexController extends Controller {
 
     public function indexAction(){
 
-        $file = __DIR__;
+        $file = APP_PATH;
         var_dump($file);die();
 
         return $this->fetch();
