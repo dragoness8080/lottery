@@ -58,8 +58,9 @@ class IndexController extends Controller {
 
                     $model->save($data);
 
-                    //$config['cur_year'] = $ball_year;
-                    //$config['cur_number'] = $ball_no + 1;
+                    //ÐÞ¸Ä²ÎÊý
+                    $file = APP_PATH . 'home/config.php';
+                    set_config($file, array('cur_year' => $ball_year, 'cur_number' => ($ball_no + 1)));
                 }
             }
         }
@@ -67,10 +68,6 @@ class IndexController extends Controller {
     }
 
     public function indexAction(){
-
-        $file = APP_PATH;
-        var_dump($file);die();
-
         return $this->fetch();
     }
 }
