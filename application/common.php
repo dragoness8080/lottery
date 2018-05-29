@@ -67,8 +67,8 @@ function set_config($path,$params){
         $keys = array();
         $vals = array();
         foreach ($params as $key => $item){
-            $keys[] = '/\'' . $key . '\'(.*?)/';
-            $vals[] = "'" . $key . "' => '" . $item . "'";
+            $keys[] = '/\'' . $key . '\'(.*?),/';
+            $vals[] = "'" . $key . "' => '" . $item . "',";
         }
 
         $string = file_get_contents($path);
