@@ -12,6 +12,7 @@ namespace app\home\controller;
 use app\home\model\TicketModel;
 use think\Config;
 use think\Controller;
+use think\Db;
 
 class IndexController extends Controller {
 
@@ -53,7 +54,8 @@ class IndexController extends Controller {
                         'red_four' => $ball[3],
                         'red_five' => $ball[4],
                         'red_six' => $ball[5],
-                        'blue' => $ball[6]
+                        'blue' => $ball[6],
+                        'lotteries' => $ball[0] . $ball[1] . $ball[2] . $ball[3] . $ball[4] . $ball[5] . $ball[6]
                     );
 
                     $model->save($data);
@@ -68,6 +70,30 @@ class IndexController extends Controller {
     }
 
     public function indexAction(){
+        //判断是否有相同的号码
+        $sames = Db::query('select lotteries,count(id) as count from ticket group by lotteries having count > 1');
+
+        //获取到和当前期数相同的以前的所有记录
+        $model = new TicketModel();
+        $config = Config::get('double_chromosphere');
+        $curList = $model->fetchSql(false)->where(array('identifier' => $config['cur_number']))->order(array('id asc'))->select();
+        $this->assign('list',$curList);
         return $this->fetch();
+    }
+
+    public function setLotteryAction(){
+        set_time_limit(0);
+        $model = new TicketModel();
+        $list = $model->fetchSql(false)->order(array('id asc'))->select();
+        $update = array();
+        foreach ($list as $key => $item){
+            $lottery = $item['red_one'] . $item['red_two'] . $item['red_three'] . $item['red_four'] . $item['red_five'] . $item['red_six'] . $item['blue'];
+            $update[] = ['id' => $item['id'],'lotteries' => $lottery];
+        }
+        if(!empty($update)){
+            $model->isUpdate()->saveAll($update);
+        }
+
+        $this->success('设置成功','Index/index');
     }
 }

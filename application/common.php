@@ -79,3 +79,32 @@ function set_config($path,$params){
         return false;
     }
 }
+
+/**
+ * 总条数(预计可以获得的总彩票条数)
+ * @return int
+ */
+function get_all_count(){
+    $count = fn_pma(33) / fn_pma(6) / fn_pma((33 - 6)) * 16;
+    return $count;
+}
+
+function fn_pma($n){
+    if($n <= 1){ return 1;}
+    return $n * fn_pma($n - 1);
+}
+
+function get_all_lottery(){
+    set_time_limit(0);
+    $red = ['01','02','03','04','05','06','07','08','09','10','11',
+            '12','13','14','15','16','17','18','19','20','21','22',
+            '23','24','25','26','27','28','29','30','31','32','33'];
+    $blue = ['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16'];
+    $list = cache('lottery_all');
+    if(empty($list)){
+        $list = array();
+        for($i = 0 ; $i < 33 ; $i ++){
+
+        }
+    }
+}

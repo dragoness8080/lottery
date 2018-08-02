@@ -9,19 +9,46 @@
     <script type="text/javascript" src="__CSS__/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div class="container">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Brand</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
         <div class="panel panel-default">
-            <div class="panel-body" style="text-align: center; padding: 30px;"></div>
+            <div class="panel-body" style="text-align: center; padding: 30px;">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th style="width: 100px;">期号</th>
+                            <th>红球一</th>
+                            <th>红球二</th>
+                            <th>红球三</th>
+                            <th>红球四</th>
+                            <th>红球五</th>
+                            <th>红球六</th>
+                            <th>蓝球</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {volist name="list" id="lottery"}
+                        <tr>
+                            <td>{$lottery.issue}</td>
+                            <td>{$lottery.red_one}</td>
+                            <td>{$lottery.red_two}</td>
+                            <td>{$lottery.red_three}</td>
+                            <td>{$lottery.red_four}</td>
+                            <td>{$lottery.red_five}</td>
+                            <td>{$lottery.red_six}</td>
+                            <td>{$lottery.blue}</td>
+                        </tr>
+                    {/volist}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </body>
-<script type="text/javascript">
-    $(document).ready(function () {
-        var get_ball = function () {
-            $.ajax();
-        }
-
-        setInterval("get_ball",1000);
-    });
-</script>
 </html>
